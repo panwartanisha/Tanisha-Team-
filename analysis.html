@@ -1,0 +1,456 @@
+{% extends "base.html" %}
+
+{% block title %}Analysis & Insights - Electricity Consumption Analysis{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="mb-2"><i class="fas fa-brain text-success"></i> Key Findings & Insights</h1>
+            <p class="text-muted">Data-driven insights from electricity consumption analysis across Indian states</p>
+        </div>
+    </div>
+
+    <!-- Main Findings Section -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h3 class="mb-4"><i class="fas fa-star text-warning"></i> Major Findings</h3>
+        </div>
+        {% for finding in insights.findings %}
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card h-100 shadow-sm finding-card">
+                <div class="card-header bg-gradient text-white">
+                    <h6 class="mb-0">{{ finding.title }}</h6>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ finding.description }}</p>
+                    <hr>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge bg-info">{{ finding.period }}</span>
+                        <strong class="text-primary">{{ finding.metric }}</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Project Scenarios Section -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h3 class="mb-4"><i class="fas fa-layer-group text-primary"></i> Project Scenarios</h3>
+            <p class="text-muted mb-4">Detailed analysis of three key scenarios exploring different dimensions of electricity consumption</p>
+        </div>
+
+        {% for scenario in insights.scenarios %}
+        <div class="col-12 mb-4">
+            <div class="card shadow-sm scenario-card">
+                <div class="card-header scenario-header-{{ scenario.number }}">
+                    <div class="d-flex align-items-center">
+                        <span class="scenario-badge">{{ scenario.number }}</span>
+                        <div>
+                            <h5 class="card-title mb-0">{{ scenario.title }}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ scenario.description }}</p>
+                    <div class="alert alert-light alert-sm border-left-info mt-3 mb-0">
+                        <strong><i class="fas fa-lightbulb text-warning"></i> Key Insight:</strong><br>
+                        {{ scenario.key_insight }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Detailed Analysis Sections -->
+    <div class="row mb-5">
+        <div class="col-12 mb-4">
+            <h3><i class="fas fa-chart-bar text-info"></i> Consumption Breakdown</h3>
+        </div>
+
+        <!-- Yearly Trend -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-light">
+                    <h6 class="mb-0"><i class="fas fa-calendar"></i> Year-on-Year Comparison</h6>
+                </div>
+                <div class="card-body">
+                    <div class="comparison-table">
+                        <table class="table table-borderless">
+                            <tr>
+                                <td><strong>Metric</strong></td>
+                                <td><strong>2019</strong></td>
+                                <td><strong>2020</strong></td>
+                                <td><strong>Change</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Total Consumption</td>
+                                <td>12,16,205</td>
+                                <td>4,93,523</td>
+                                <td class="text-danger">-59.42%</td>
+                            </tr>
+                            <tr>
+                                <td>Avg Daily Consumption</td>
+                                <td>102.66</td>
+                                <td>103.86</td>
+                                <td class="text-success">+1.17%</td>
+                            </tr>
+                            <tr>
+                                <td>Data Records</td>
+                                <td>11,847</td>
+                                <td>4,752</td>
+                                <td class="text-danger">-59.92%</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="alert alert-info small mt-3 mb-0">
+                        <strong>Why the decline?</strong> 2020 data only covers up to December 5, 2020 (338 days), while 2019 is complete (365 days). 
+                        The significant drop is primarily due to COVID-19 lockdown impact from March-June 2020.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Regional Analysis -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-light">
+                    <h6 class="mb-0"><i class="fas fa-map"></i> Regional Consumption Distribution</h6>
+                </div>
+                <div class="card-body">
+                    <div class="regional-analysis">
+                        <div class="region-item mb-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <strong>Western (WR)</strong>
+                                <span class="text-primary">31.61%</span>
+                            </div>
+                            <div class="progress" style="height: 20px;">
+                                <div class="progress-bar bg-primary" style="width: 31.61%"></div>
+                            </div>
+                            <small class="text-muted">540,370 units</small>
+                        </div>
+                        <div class="region-item mb-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <strong>Northern (NR)</strong>
+                                <span class="text-success">29.61%</span>
+                            </div>
+                            <div class="progress" style="height: 20px;">
+                                <div class="progress-bar bg-success" style="width: 29.61%"></div>
+                            </div>
+                            <small class="text-muted">506,255 units</small>
+                        </div>
+                        <div class="region-item mb-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <strong>Southern (SR)</strong>
+                                <span class="text-info">27.88%</span>
+                            </div>
+                            <div class="progress" style="height: 20px;">
+                                <div class="progress-bar bg-info" style="width: 27.88%"></div>
+                            </div>
+                            <small class="text-muted">476,679 units</small>
+                        </div>
+                        <div class="region-item mb-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <strong>Eastern (ER)</strong>
+                                <span class="text-warning">9.63%</span>
+                            </div>
+                            <div class="progress" style="height: 20px;">
+                                <div class="progress-bar bg-warning" style="width: 9.63%"></div>
+                            </div>
+                            <small class="text-muted">164,715 units</small>
+                        </div>
+                        <div class="region-item">
+                            <div class="d-flex justify-content-between mb-2">
+                                <strong>North-Eastern (NER)</strong>
+                                <span class="text-danger">1.27%</span>
+                            </div>
+                            <div class="progress" style="height: 20px;">
+                                <div class="progress-bar bg-danger" style="width: 1.27%"></div>
+                            </div>
+                            <small class="text-muted">21,710 units</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top & Bottom States -->
+    <div class="row mb-5">
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-light">
+                    <h6 class="mb-0"><i class="fas fa-crown text-warning"></i> Top 10 Consuming States</h6>
+                </div>
+                <div class="card-body">
+                    <ol class="list-group list-group-numbered">
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Maharashtra</strong>
+                            <span class="badge bg-primary">217,080</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Gujarat</strong>
+                            <span class="badge bg-primary">162,489</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Uttar Pradesh</strong>
+                            <span class="badge bg-primary">157,960</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Tamil Nadu</strong>
+                            <span class="badge bg-primary">151,272</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Rajasthan</strong>
+                            <span class="badge bg-primary">109,877</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Madhya Pradesh</strong>
+                            <span class="badge bg-primary">104,766</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Karnataka</strong>
+                            <span class="badge bg-primary">102,666</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Telangana</strong>
+                            <span class="badge bg-primary">94,065</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Andhra Pradesh</strong>
+                            <span class="badge bg-primary">88,604</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Punjab</strong>
+                            <span class="badge bg-primary">70,996</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-light">
+                    <h6 class="mb-0"><i class="fas fa-arrow-down text-muted"></i> Bottom 10 Consuming States</h6>
+                </div>
+                <div class="card-body">
+                    <ol class="list-group list-group-numbered" start="34">
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Goa</strong>
+                            <span class="badge bg-secondary">5,580</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Pondy</strong>
+                            <span class="badge bg-secondary">3,759</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Meghalaya</strong>
+                            <span class="badge bg-secondary">2,839</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Chandigarh</strong>
+                            <span class="badge bg-secondary">2,083</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Tripura</strong>
+                            <span class="badge bg-secondary">2,055</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Manipur</strong>
+                            <span class="badge bg-secondary">1,255</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Nagaland</strong>
+                            <span class="badge bg-secondary">1,088</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Arunachal Pradesh</strong>
+                            <span class="badge bg-secondary">1,061</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Mizoram</strong>
+                            <span class="badge bg-secondary">858</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Sikkim</strong>
+                            <span class="badge bg-secondary">649</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lockdown Impact Analysis -->
+    <div class="row mb-5">
+        <div class="col-12 mb-4">
+            <h3><i class="fas fa-virus text-danger"></i> COVID-19 Lockdown Impact</h3>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100 text-center">
+                <div class="card-body">
+                    <h6 class="card-title text-muted">Before Lockdown</h6>
+                    <p class="display-6 fw-bold text-primary">103.10</p>
+                    <small class="text-muted">Avg units/day (Jan-Feb 2020)</small>
+                    <p class="mt-3 small">1,377,910 total units<br>13,365 observations</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100 text-center border-danger">
+                <div class="card-body">
+                    <h6 class="card-title text-muted">During Lockdown</h6>
+                    <p class="display-6 fw-bold text-danger">100.03</p>
+                    <small class="text-muted">Avg units/day (Mar-Jun 2020)</small>
+                    <p class="mt-3 small">224,475 total units<br>2,244 observations</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100 text-center">
+                <div class="card-body">
+                    <h6 class="card-title text-muted">After Lockdown</h6>
+                    <p class="display-6 fw-bold text-success">108.43</p>
+                    <small class="text-muted">Avg units/day (Jul-Dec 2020)</small>
+                    <p class="mt-3 small">107,343 total units<br>990 observations</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 mb-4">
+            <div class="alert alert-warning alert-sm">
+                <strong><i class="fas fa-lightbulb text-warning"></i> Key Observations:</strong>
+                <ul class="mb-0 mt-2 small">
+                    <li>The immediate lockdown impact was -2.98%, smaller than expected due to offsetting factors</li>
+                    <li>Industrial consumption fell sharply (factories, offices closed)</li>
+                    <li>Residential consumption increased (work-from-home, increased heating/cooling)</li>
+                    <li>Post-lockdown recovery showed +8.39% improvement, but state-wise recovery was highly variable</li>
+                    <li>Some states (Punjab +40.18%) recovered quickly, while others (Sikkim -11.85%) continued to decline</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recommendations Section -->
+    <div class="row">
+        <div class="col-12">
+            <h3><i class="fas fa-chart-line text-info"></i> Recommendations & Implications</h3>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-info text-white">
+                    <h6 class="mb-0"><i class="fas fa-lightbulb"></i> For Energy Planners</h6>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <strong>Regional Diversification:</strong> Invest in renewable energy in WR, NR, and SR where consumption is concentrated
+                        </li>
+                        <li class="mb-3">
+                            <strong>Resilience Planning:</strong> Develop strategies for differential recovery in various regions
+                        </li>
+                        <li class="mb-3">
+                            <strong>Peak Management:</strong> Address seasonal demand fluctuations with targeted interventions
+                        </li>
+                        <li>
+                            <strong>Infrastructure Investment:</strong> Focus on high-consuming states for grid upgrades and renewable integration
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-success text-white">
+                    <h6 class="mb-0"><i class="fas fa-chart-pie"></i> For Policy Makers</h6>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <strong>Economic Support:</strong> Rural areas showed less resilience; targeted support needed for economic diversification
+                        </li>
+                        <li class="mb-3">
+                            <strong>Tariff Strategy:</strong> Consider differential pricing for industrial vs. residential sectors
+                        </li>
+                        <li class="mb-3">
+                            <strong>Sustainability Goals:</strong> 45% of consumption from metro cities offers opportunities for efficiency programs
+                        </li>
+                        <li>
+                            <strong>Crisis Management:</strong> Develop state-specific protocols for handling demand shocks
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.finding-card {
+    transition: all 0.3s ease;
+}
+
+.finding-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15) !important;
+}
+
+.scenario-card {
+    border-top: 5px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.scenario-card:hover {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
+}
+
+.scenario-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-weight: bold;
+    color: white;
+    margin-right: 15px;
+    font-size: 20px;
+}
+
+.scenario-header-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+.scenario-header-2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+.scenario-header-3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+
+.comparison-table td {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.comparison-table tr:last-child td {
+    border-bottom: none;
+}
+
+.regional-analysis .region-item {
+    padding: 10px 0;
+}
+
+.alert-sm {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+}
+
+.border-left-info {
+    border-left: 4px solid #0dcaf0 !important;
+}
+</style>
+{% endblock %}

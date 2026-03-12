@@ -1,0 +1,468 @@
+{% extends "base.html" %}
+
+{% block title %}Story - Electricity Consumption Analysis{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="mb-2"><i class="fas fa-book text-info"></i> The Story of India's Electricity Consumption</h1>
+            <p class="text-muted">A guided narrative through electricity consumption patterns and COVID-19 impact (Jan 2019 - Dec 2020)</p>
+        </div>
+    </div>
+
+    <!-- Story Progress Indicator -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <div class="progress-steps d-flex justify-content-between">
+                        <div class="step text-center">
+                            <div class="step-circle">1</div>
+                            <p class="small mt-2">The Big Picture</p>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step text-center">
+                            <div class="step-circle">2</div>
+                            <p class="small mt-2">Regional Variations</p>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step text-center">
+                            <div class="step-circle">3</div>
+                            <p class="small mt-2">Lockdown Impact</p>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step text-center">
+                            <div class="step-circle">4</div>
+                            <p class="small mt-2">Recovery Analysis</p>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step text-center">
+                            <div class="step-circle">5</div>
+                            <p class="small mt-2">Key Findings</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tableau Story Embedding -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Interactive Story</h5>
+                    <div>
+                        <button class="btn btn-sm btn-light" id="storyRefresh">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                        <a href="#" class="btn btn-sm btn-light" id="storyFullscreen">
+                            <i class="fas fa-expand"></i> Fullscreen
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <!-- Loading Indicator -->
+                    <div id="storyLoading" class="text-center py-5">
+                        <div class="spinner-border text-info" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-3 text-muted">Loading story...</p>
+                    </div>
+
+                    <!-- Tableau Story Container -->
+                    <div id="storyContainer" style="display: none; min-height: 800px;">
+                        <!-- IMPORTANT: Replace the URL below with your actual Tableau story public URL -->
+                        <iframe
+                            id="storyFrame"
+                            src="https://public.tableau.com/views/YourStoryName/Story1?:embed=yes&:display_count=no&:showVizHome=no"
+                            width="100%"
+                            height="800"
+                            style="border: none;"
+                            allowfullscreen="">
+                        </iframe>
+                    </div>
+
+                    <!-- Fallback Content -->
+                    <div id="storyFallback" class="p-5 text-center">
+                        <h5 class="text-warning mb-3">
+                            <i class="fas fa-exclamation-triangle"></i> Story Not Configured
+                        </h5>
+                        <p class="text-muted mb-4">
+                            The Tableau story URL needs to be configured. Please update the story URL in the Flask configuration.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Story Scenes Overview -->
+    <div class="row">
+        <div class="col-12">
+            <h3 class="mb-4"><i class="fas fa-layers text-primary"></i> Story Scenes</h3>
+        </div>
+    </div>
+
+    <!-- Scene 1 -->
+    <div class="row mb-4">
+        <div class="col-lg-8">
+            <div class="card shadow-sm h-100 border-left-primary">
+                <div class="card-header bg-light border-left-primary">
+                    <h5 class="mb-0">
+                        <span class="badge bg-primary me-2">Scene 1</span>
+                        The Big Picture
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="mb-3">
+                        <strong>Setting the Context:</strong> This scene establishes the overall narrative by showing India's electricity 
+                        consumption landscape from January 2019 to December 2020.
+                    </p>
+                    <ul class="mb-3">
+                        <li>Total consumption figures for 2019 vs 2020</li>
+                        <li>Regional breakdown of electricity usage</li>
+                        <li>Trend line showing month-by-month variations</li>
+                    </ul>
+                    <p class="small text-muted mb-0">
+                        <i class="fas fa-lightbulb text-warning"></i>
+                        <strong>Key Insight:</strong> 2019 saw consistent consumption around 100-120 units/day on average, 
+                        while 2020 showed a dramatic shift.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card shadow-sm bg-light">
+                <div class="card-body">
+                    <h6 class="card-title mb-3"><i class="fas fa-chart-bar"></i> Metrics</h6>
+                    <p class="small mb-2">
+                        <strong>2019 Total:</strong><br>
+                        12,16,205 units
+                    </p>
+                    <p class="small mb-2">
+                        <strong>2020 Total:</strong><br>
+                        4,93,523 units
+                    </p>
+                    <p class="small text-danger">
+                        <strong>Change:</strong><br>
+                        -59.42%
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scene 2 -->
+    <div class="row mb-4">
+        <div class="col-lg-8">
+            <div class="card shadow-sm h-100 border-left-success">
+                <div class="card-header bg-light border-left-success">
+                    <h5 class="mb-0">
+                        <span class="badge bg-success me-2">Scene 2</span>
+                        Regional Variations
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="mb-3">
+                        <strong>Exploring Regional Differences:</strong> This scene examines how electricity consumption 
+                        varies across different regions of India due to climate, industrial activity, and population density.
+                    </p>
+                    <ul class="mb-3">
+                        <li>Western Region (WR) - 31.61% of national consumption</li>
+                        <li>Northern Region (NR) - 29.61% of national consumption</li>
+                        <li>Southern Region (SR) - 27.88% of national consumption</li>
+                        <li>Eastern Region (ER) & North-Eastern Region (NER) - Combined 10.76%</li>
+                    </ul>
+                    <p class="small text-muted mb-0">
+                        <i class="fas fa-lightbulb text-warning"></i>
+                        <strong>Key Insight:</strong> India's electricity demand is concentrated in three major regions, 
+                        which together account for nearly 89% of the national consumption.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card shadow-sm bg-light">
+                <div class="card-body">
+                    <h6 class="card-title mb-3"><i class="fas fa-map"></i> Top States</h6>
+                    <p class="small mb-2">
+                        <strong>1. Maharashtra</strong><br>
+                        217,080 units (12.7%)
+                    </p>
+                    <p class="small mb-2">
+                        <strong>2. Gujarat</strong><br>
+                        162,489 units (9.5%)
+                    </p>
+                    <p class="small mb-2">
+                        <strong>3. Uttar Pradesh</strong><br>
+                        157,960 units (9.2%)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scene 3 -->
+    <div class="row mb-4">
+        <div class="col-lg-8">
+            <div class="card shadow-sm h-100 border-left-danger">
+                <div class="card-header bg-light border-left-danger">
+                    <h5 class="mb-0">
+                        <span class="badge bg-danger me-2">Scene 3</span>
+                        COVID-19 Lockdown Impact
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="mb-3">
+                        <strong>The Pandemic Effect:</strong> This critical scene reveals the immediate impact of nationwide lockdown 
+                        (March-June 2020) on electricity consumption across India.
+                    </p>
+                    <ul class="mb-3">
+                        <li><strong>Before Lockdown (Jan-Feb 2020):</strong> Average 103.10 units per day</li>
+                        <li><strong>During Lockdown (Mar-Jun 2020):</strong> Average 100.03 units per day</li>
+                        <li><strong>Impact Magnitude:</strong> -2.98% during lockdown period</li>
+                    </ul>
+                    <p class="small text-muted mb-0">
+                        <i class="fas fa-lightbulb text-warning"></i>
+                        <strong>Key Insight:</strong> While industrial consumption dropped sharply, residential consumption increased, 
+                        partially offsetting the overall decline during lockdown.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card shadow-sm bg-light">
+                <div class="card-body">
+                    <h6 class="card-title mb-3"><i class="fas fa-virus text-danger"></i> Lockdown Periods</h6>
+                    <p class="small mb-2">
+                        <strong>Full Lockdown:</strong><br>
+                        Mar 25 - May 30, 2020
+                    </p>
+                    <p class="small mb-2">
+                        <strong>Partial Lockdown:</strong><br>
+                        Jun 1 - Jun 30, 2020
+                    </p>
+                    <p class="small text-danger">
+                        <strong>Data Records:</strong><br>
+                        2,244 observations
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scene 4 -->
+    <div class="row mb-4">
+        <div class="col-lg-8">
+            <div class="card shadow-sm h-100 border-left-warning">
+                <div class="card-header bg-light border-left-warning">
+                    <h5 class="mb-0">
+                        <span class="badge bg-warning me-2">Scene 4</span>
+                        Recovery Analysis
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="mb-3">
+                        <strong>The Path to Recovery:</strong> Following the lockdown, this scene examines how different states 
+                        rebounded at varying rates based on local economic activity resumption.
+                    </p>
+                    <ul class="mb-3">
+                        <li><strong>Post-Lockdown (Jul-Dec 2020):</strong> Average 108.43 units per day</li>
+                        <li><strong>Recovery Rate:</strong> +8.39% improvement from lockdown levels</li>
+                        <li><strong>State Variation:</strong> Recovery rates ranged from -12% to +40% across states</li>
+                    </ul>
+                    <p class="small text-muted mb-0">
+                        <i class="fas fa-lightbulb text-warning"></i>
+                        <strong>Key Insight:</strong> Recovery was not uniform - states with diverse economies (agriculture + industry) 
+                        recovered faster than those dependent on a single sector.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card shadow-sm bg-light">
+                <div class="card-body">
+                    <h6 class="card-title mb-3"><i class="fas fa-arrow-up"></i> Recovery Leaders</h6>
+                    <p class="small mb-2">
+                        <strong>Highest Recovery:</strong><br>
+                        Punjab (+40.18%)
+                    </p>
+                    <p class="small mb-2">
+                        <strong>Strong Recovery:</strong><br>
+                        Delhi (+26.07%)
+                    </p>
+                    <p class="small mb-2">
+                        <strong>Slowest Recovery:</strong><br>
+                        Sikkim (-11.85%)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scene 5 -->
+    <div class="row mb-4">
+        <div class="col-lg-8">
+            <div class="card shadow-sm h-100 border-left-info">
+                <div class="card-header bg-light border-left-info">
+                    <h5 class="mb-0">
+                        <span class="badge bg-info me-2">Scene 5</span>
+                        Key Findings & Conclusions
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="mb-3">
+                        <strong>Summary of Insights:</strong> This final scene brings together all the insights to paint a comprehensive 
+                        picture of India's electricity consumption during this critical period.
+                    </p>
+                    <ul class="mb-3">
+                        <li>COVID-19 lockdown caused significant but not catastrophic impact on electricity consumption</li>
+                        <li>Regional disparities in consumption reflect economic structure and development levels</li>
+                        <li>Recovery patterns show economic resilience but at differential rates across states</li>
+                        <li>Metropolitan states recovered faster due to diverse economic bases</li>
+                        <li>Agricultural states showed more stable demand throughout the period</li>
+                    </ul>
+                    <p class="small text-muted mb-0">
+                        <i class="fas fa-lightbulb text-warning"></i>
+                        <strong>Takeaway:</strong> Understanding regional electricity consumption patterns is crucial for policy-making, 
+                        infrastructure planning, and economic resilience strategies.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card shadow-sm bg-light">
+                <div class="card-body">
+                    <h6 class="card-title mb-3"><i class="fas fa-chart-pie"></i> Consumption Share</h6>
+                    <p class="small mb-2">
+                        <strong>Top 5 States:</strong><br>
+                        44.8% of total
+                    </p>
+                    <p class="small mb-2">
+                        <strong>Metro Cities:</strong><br>
+                        45% of total
+                    </p>
+                    <p class="small mb-2">
+                        <strong>Rural Areas:</strong><br>
+                        55% of total
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Tips -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="alert alert-info" role="alert">
+                <h5 class="alert-heading"><i class="fas fa-play-circle"></i> How to Navigate This Story</h5>
+                <p class="mb-2">
+                    Use the navigation controls in the Tableau story viewer to move between scenes. Each scene builds upon the previous one 
+                    to tell a complete narrative about electricity consumption patterns during this critical period.
+                </p>
+                <ul class="mb-0 small">
+                    <li>Click the <strong>Forward</strong> arrow to move to the next scene</li>
+                    <li>Click the <strong>Back</strong> arrow to revisit previous scenes</li>
+                    <li>Use the <strong>scene list</strong> to jump to any specific scene</li>
+                    <li>All visualizations are interactive - hover and click to explore data</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the iframe source from config
+    const storyUrl = "{% if config.story_url %}{{ config.story_url }}{% else %}false{% endif %}";
+    const container = document.getElementById('storyContainer');
+    const fallback = document.getElementById('storyFallback');
+    const spinner = document.getElementById('storyLoading');
+    
+    if (storyUrl && storyUrl !== 'false') {
+        // Story URL is configured, show iframe
+        container.style.display = 'block';
+        fallback.style.display = 'none';
+        
+        // Hide spinner after iframe loads
+        const iframe = document.getElementById('storyFrame');
+        iframe.onload = function() {
+            spinner.style.display = 'none';
+        };
+    } else {
+        // No URL configured, show fallback
+        container.style.display = 'none';
+        fallback.style.display = 'block';
+        spinner.style.display = 'none';
+    }
+    
+    // Story refresh button
+    document.getElementById('storyRefresh').addEventListener('click', function() {
+        const iframe = document.getElementById('storyFrame');
+        if (iframe) {
+            iframe.src = iframe.src;
+        }
+    });
+    
+    // Story fullscreen button
+    document.getElementById('storyFullscreen').addEventListener('click', function(e) {
+        e.preventDefault();
+        const iframe = document.getElementById('storyFrame');
+        if (iframe && iframe.requestFullscreen) {
+            iframe.requestFullscreen();
+        }
+    });
+});
+</script>
+
+<style>
+.border-left-primary { border-left: 5px solid #0d6efd !important; }
+.border-left-success { border-left: 5px solid #198754 !important; }
+.border-left-danger { border-left: 5px solid #dc3545 !important; }
+.border-left-warning { border-left: 5px solid #ffc107 !important; }
+.border-left-info { border-left: 5px solid #0dcaf0 !important; }
+
+.progress-steps {
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.step {
+    flex: 1;
+    min-width: 120px;
+}
+
+.step-circle {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.step-line {
+    flex: 1;
+    min-width: 20px;
+    border-top: 3px solid #dee2e6;
+    margin-top: 25px;
+}
+
+@media (max-width: 768px) {
+    .step-line {
+        min-width: 10px;
+    }
+    .step p {
+        font-size: 0.75rem !important;
+    }
+}
+</style>
+{% endblock %}

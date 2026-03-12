@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Electricity Consumption Analysis in India">
+    <meta name="keywords" content="electricity, consumption, India, analysis, COVID-19">
+    <title>{% block title %}Electricity Consumption Analysis - India{% endblock %}</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="/">
+                <i class="fas fa-bolt text-warning"></i> Electricity Analysis
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/dashboard' %}active{% endif %}" href="/dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/story' %}active{% endif %}" href="/story">Story</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/analysis' %}active{% endif %}" href="/analysis">Analysis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/about' %}active{% endif %}" href="/about">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="text-warning mb-3"><i class="fas fa-info-circle"></i> About Project</h5>
+                    <p class="small">Analysis of electricity consumption patterns across Indian states from Jan 2019 to Dec 2020, including COVID-19 lockdown impact.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="text-warning mb-3"><i class="fas fa-link"></i> Quick Links</h5>
+                    <ul class="list-unstyled small">
+                        <li><a href="/dashboard" class="text-light text-decoration-none">Dashboard</a></li>
+                        <li><a href="/story" class="text-light text-decoration-none">Story</a></li>
+                        <li><a href="/analysis" class="text-light text-decoration-none">Analysis</a></li>
+                        <li><a href="/about" class="text-light text-decoration-none">Team Info</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="text-warning mb-3"><i class="fas fa-tools"></i> Tools Used</h5>
+                    <p class="small">
+                        <span class="badge bg-info">Tableau</span>
+                        <span class="badge bg-info">Flask</span>
+                        <span class="badge bg-info">Python</span>
+                        <span class="badge bg-info">MySQL</span>
+                    </p>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center small">
+                <p>&copy; 2024 Electricity Consumption Analysis. All rights reserved. | 
+                Data Period: Jan 2, 2019 - Dec 5, 2020</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

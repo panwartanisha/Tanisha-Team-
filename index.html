@@ -1,0 +1,236 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Electricity Consumption Analysis{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section bg-gradient text-white py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold mb-3">
+                    <i class="fas fa-bolt text-warning"></i> Electricity Consumption Analysis
+                </h1>
+                <p class="lead mb-4">
+                    Comprehensive analysis of electricity consumption patterns across Indian states from January 2019 to December 2020, 
+                    including the impact of COVID-19 lockdown on energy usage.
+                </p>
+                <div class="d-flex gap-2">
+                    <a href="/dashboard" class="btn btn-warning btn-lg">
+                        <i class="fas fa-chart-bar"></i> View Dashboard
+                    </a>
+                    <a href="/story" class="btn btn-light btn-lg">
+                        <i class="fas fa-book"></i> Read Story
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4 text-center">
+                <div class="icon-large">
+                    <i class="fas fa-chart-line" style="font-size: 100px; color: #ffc107; opacity: 0.2;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Key Statistics Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5 fw-bold">Key Statistics</h2>
+        <div class="row g-4">
+            <!-- Total Records -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body text-center">
+                        <i class="fas fa-database text-primary" style="font-size: 40px;"></i>
+                        <h5 class="card-title mt-3">Total Records</h5>
+                        <p class="card-text display-6 fw-bold text-primary">
+                            {% if stats.dataset_overview %}{{ "{:,}".format(stats.dataset_overview.total_records) }}{% else %}16,599{% endif %}
+                        </p>
+                        <small class="text-muted">Data points collected</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- States Covered -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body text-center">
+                        <i class="fas fa-map" text-success" style="font-size: 40px;"></i>
+                        <h5 class="card-title mt-3">States Covered</h5>
+                        <p class="card-text display-6 fw-bold text-success">
+                            {% if stats.dataset_overview %}{{ stats.dataset_overview.unique_states }}{% else %}33{% endif %}
+                        </p>
+                        <small class="text-muted">Across India</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Regions Analyzed -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body text-center">
+                        <i class="fas fa-compass text-info" style="font-size: 40px;"></i>
+                        <h5 class="card-title mt-3">Regions</h5>
+                        <p class="card-text display-6 fw-bold text-info">
+                            {% if stats.dataset_overview %}{{ stats.dataset_overview.unique_regions }}{% else %}5{% endif %}
+                        </p>
+                        <small class="text-muted">NR, WR, SR, ER, NER</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recovery Rate -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body text-center">
+                        <i class="fas fa-arrow-up text-danger" style="font-size: 40px;"></i>
+                        <h5 class="card-title mt-3">Recovery Rate</h5>
+                        <p class="card-text display-6 fw-bold text-danger">
+                            {% if stats.recovery_rate_% %}{{ "%.2f"|format(stats.recovery_rate_%) }}%{% else %}8.39%{% endif %}
+                        </p>
+                        <small class="text-muted">Post-lockdown recovery</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Project Scenarios Section -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5 fw-bold">Project Scenarios</h2>
+        <div class="row g-4">
+            <!-- Scenario 1 -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-left-primary">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="badge-circle bg-primary text-white me-3">
+                                <span style="font-size: 24px; font-weight: bold;">1</span>
+                            </div>
+                            <h5 class="card-title mb-0">Overall Trends</h5>
+                        </div>
+                        <p class="card-text">
+                            Analysis of month-by-month consumption changes from January 2019 to December 2020, 
+                            revealing expected and unusual consumption patterns influenced by seasonal demand and COVID-19.
+                        </p>
+                        <a href="/story" class="btn btn-sm btn-primary">Explore <i class="fas fa-arrow-right ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scenario 2 -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-left-success">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="badge-circle bg-success text-white me-3">
+                                <span style="font-size: 24px; font-weight: bold;">2</span>
+                            </div>
+                            <h5 class="card-title mb-0">Regional Variations</h5>
+                        </div>
+                        <p class="card-text">
+                            Understanding uneven electricity demand distribution across Northern, Southern, Eastern, 
+                            Western, and Northeastern regions due to climate, industry, and population density.
+                        </p>
+                        <a href="/dashboard" class="btn btn-sm btn-success">View Dashboard <i class="fas fa-arrow-right ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scenario 3 -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-left-danger">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="badge-circle bg-danger text-white me-3">
+                                <span style="font-size: 24px; font-weight: bold;">3</span>
+                            </div>
+                            <h5 class="card-title mb-0">Lockdown Recovery</h5>
+                        </div>
+                        <p class="card-text">
+                            Evaluation of differential recovery patterns across states following COVID-19 restrictions, 
+                            showing how economic activity and energy needs rebounded diversely.
+                        </p>
+                        <a href="/analysis" class="btn btn-sm btn-danger">View Analysis <i class="fas fa-arrow-right ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Data Period Banner -->
+<section class="bg-warning bg-opacity-10 py-4">
+    <div class="container text-center">
+        <h5 class="mb-2"><i class="fas fa-calendar-alt"></i> Data Period</h5>
+        <p class="mb-0 display-6 fw-bold">January 2, 2019 - December 5, 2020</p>
+        <p class="text-muted small mt-2">Including COVID-19 lockdown period: March - June 2020</p>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="py-5 bg-gradient text-white">
+    <div class="container text-center">
+        <h2 class="mb-4 fw-bold">Ready to Explore the Data?</h2>
+        <p class="lead mb-4">Choose from multiple ways to analyze electricity consumption patterns:</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="/dashboard" class="btn btn-light btn-lg">
+                <i class="fas fa-chart-bar"></i> Interactive Dashboard
+            </a>
+            <a href="/story" class="btn btn-light btn-lg">
+                <i class="fas fa-book"></i> Guided Story
+            </a>
+            <a href="/analysis" class="btn btn-light btn-lg">
+                <i class="fas fa-brain"></i> Key Insights
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+.hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+}
+
+.bg-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.border-left-primary {
+    border-left: 5px solid #0d6efd !important;
+}
+
+.border-left-success {
+    border-left: 5px solid #198754 !important;
+}
+
+.border-left-danger {
+    border-left: 5px solid #dc3545 !important;
+}
+
+.badge-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
+}
+</style>
+{% endblock %}
